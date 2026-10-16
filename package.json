@@ -1,0 +1,29 @@
+{
+  "name": "disk-monitor",
+  "version": "1.0.0",
+  "description": "C Drive Disk Monitor",
+  "main": "main.js",
+  "author": "seongkwon",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --win"
+  },
+  "devDependencies": {
+    "electron": "^29.0.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.monitor.disk",
+    "productName": "C드라이브모니터",
+    "win": {
+      "target": [
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    }
+  }
+}

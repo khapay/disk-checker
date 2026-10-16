@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>C드라이브 용량</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', AppleSDGothicNeo-Regular, sans-serif;
+      background: #f0f0f0;
+      color: #333;
+      padding: 4px 8px;
+      display: flex;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      user-select: none;
+      -webkit-app-region: drag; /* 창 드래그 이동 */
+      border: 1px solid #c8c8c8;
+    }
+
+    /* 우측 상단 닫기 X 버튼 */
+    .close-btn {
+      position: absolute;
+      top: 3px;
+      right: 7px;
+      font-size: 11px;
+      font-weight: bold;
+      color: #444;
+      cursor: pointer;
+      -webkit-app-region: no-drag;
+      line-height: 1;
+    }
+    .close-btn:hover { color: #d83b01; }
+
+    .container {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      width: 100%;
+    }
+
+    /* 수치 카드 */
+    .card {
+      background: #ffffff;
+      border: 1px solid #dadada;
+      border-radius: 2px;
+      padding: 2px 4px;
+      min-width: 58px;
+      text-align: center;
+      -webkit-app-region: no-drag;
+    }
+    .card .title {
+      font-size: 9px;
+      color: #777;
+      margin-bottom: 1px;
+      white-space: nowrap;
+    }
+    .card .value {
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .total .value { color: #111111; }
+    .used .value  { color: #0078d4; }
+    .free .value  { color: #107c10; }
+
+    /* 자동 새로고침 설정 */
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-left: 2px;
+      -webkit-app-region: no-drag;
+    }
+    .control-label {
+      font-size: 10px;
+      color: #333;
+      margin-bottom: 2px;
+      white-space: nowrap;
+    }
+    .input-wrap {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      font-size: 10px;
+    }
+    .input-sec {
+      width: 28px;
+      height: 18px;
+      padding: 0;
+      border: 1px solid #005a9e;
+      border-radius: 2px;
+      text-align: center;
+      font-size: 11px;
+      font-weight: bold;
+      outline: none;
+    }
+
+    /* 실행 버튼 */
+    .btn-action {
+      background: #4a90e2;
+      color: white;
+      border: none;
+      border-radius: 2px;
+      padding: 6px 9px;
+      font-size: 11px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-left: 2px;
+      -webkit-app-region: no-drag;
+      white-space: nowrap;
+    }
+    .btn-action:hover { background: #357abd; }
+    .btn-action.running { background: #d83b01; }
+  </style>
+</head>
+<body>
+
+  <div class="close-btn" id="btnClose">✕</div>
+
+  <div class="container">
+    <div class="card total">
+      <div class="title">총 디스크 용량</div>
+      <div class="value" id="txtTotal">-- GB</div>
+    </div>
+
+    <div class="card used">
+      <div class="title">사용 중인 용량</div>
+      <div class="value" id="txtUsed">-- GB</div>
+    </div>
+
+    <div class="card free">
+      <div class="title">남은 잔여 용량</div>
+      <div class="value" id="txtFree">-- GB</div>
+    </div>
+
+    <div class="control-group">
+      <div class="control-label">자동 새로고침</div>
+      <div class="input-wrap">
+        <input type="number" id="inputSec" class="input-sec" value="5" min="1">
+        <span>초</span>
+      </div>
+    </div>
+
+    <button id="btnAction" class="btn-action">실행</button>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
